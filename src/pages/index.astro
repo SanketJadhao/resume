@@ -1,15 +1,15 @@
 ---
 // src/pages/index.astro
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro"; // Renamed from HeaderDark
-import HeroSection from "../components/HeroSection.astro"; // Renamed
-import AboutSection from "../components/AboutSection.astro"; // Renamed
-import ExperienceSection from "../components/ExperienceSection.astro"; // Renamed
-import ProjectsSection from "../components/ProjectsSection.astro"; // Renamed
-import SkillsSection from "../components/SkillsSection.astro"; // Renamed
-import EducationSection from "../components/EducationSection.astro"; // Renamed
-import ContactSection from "../components/ContactSection.astro"; // Renamed
-import Footer from "../components/Footer.astro"; // Renamed from FooterDark
+import Header from "../components/Header.astro";
+import HeroSection from "../components/HeroSection.tsx";
+import AboutSection from "../components/AboutSection.tsx";
+import ExperienceSection from "../components/ExperienceSection.tsx";
+import ProjectsSection from "../components/ProjectsSection.tsx";
+import SkillsSection from "../components/SkillsSection.tsx";
+import EducationSection from "../components/EducationSection.tsx";
+import ContactSection from "../components/ContactSection.tsx";
+import Footer from "../components/Footer.astro";
 
 const pageTitle = "Sanket Jadhao - Resume Website";
 const pageDescription =
@@ -17,11 +17,11 @@ const pageDescription =
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <HeroSection />
-  <AboutSection />
-  <ExperienceSection />
-  <ProjectsSection />
-  <SkillsSection />
-  <EducationSection />
-  <ContactSection />
+  <HeroSection client:load />
+  <AboutSection client:visible />
+  <ExperienceSection client:visible />
+  <ProjectsSection client:visible />
+  <SkillsSection client:visible />
+  <EducationSection client:visible />
+  <ContactSection client:visible />
 </Layout>

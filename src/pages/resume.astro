@@ -1,0 +1,217 @@
+---
+import "../styles/global.css";
+import { experiences } from "../data/experience";
+import { education, researchPaper } from "../data/education";
+import { projects } from "../data/projects";
+import { skills } from "../data/skills";
+
+const academicProjects = projects.filter((p) => p.category === "University Project");
+
+const skillGroups = [
+  { label: "Languages", items: skills.languages },
+  { label: "Web/Mobile", items: skills.webAndMobile },
+  { label: "Databases", items: skills.databases },
+  { label: "ML/DS", items: skills.mlAndDataScience },
+  { label: "Tools", items: skills.tools },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sanket Jadhao's resume" />
+    <title>Sanket Jadhao - Resume</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="antialiased bg-[var(--gray-900)]">
+    <div class="no-print sticky top-0 z-50 bg-[var(--gray-900)]/90 backdrop-blur-md border-b border-[var(--gray-700)] py-3">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <a href="/" class="text-sm font-semibold text-[var(--emerald-400)] hover:underline">
+          ← Back to Portfolio
+        </a>
+        <button
+          id="print-button"
+          class="px-4 py-2 text-sm rounded-lg font-semibold bg-[var(--emerald-600)] text-white hover:bg-[var(--emerald-500)] transition-colors">
+          Print / Save as PDF
+        </button>
+      </div>
+    </div>
+
+    <main class="resume-doc container mx-auto px-4 sm:px-6 lg:px-8 py-10 max-w-4xl">
+      <header class="text-center mb-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-[var(--gray-100)]">Sanket Jadhao</h1>
+        <p class="text-sm text-[var(--gray-400)] mt-2">
+          Gainesville, FL-32608 (Relocatable) | (352) 709-0771 |
+          <a href="mailto:sanketjadhao2002@gmail.com" class="hover:text-[var(--emerald-400)]"
+            >sanketjadhao2002@gmail.com</a
+          > |
+          <a
+            href="https://linkedin.com/in/sanket-jadhao/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-[var(--emerald-400)]">LinkedIn</a
+          >
+        </p>
+      </header>
+
+      <section class="mb-6">
+        <h2 class="resume-h2">Introduction</h2>
+        <p class="text-[var(--gray-300)] text-sm leading-relaxed">
+          Driven Master's student in Computer Science specializing in full-stack web
+          development, blockchain, and data analysis. Eager to apply Python, Java and other
+          frameworks, and machine learning expertise to create impactful solutions.
+        </p>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="resume-h2">Education</h2>
+        <div class="space-y-2">
+          {
+            education.map((edu) => (
+              <div class="flex flex-col sm:flex-row sm:justify-between text-sm">
+                <div>
+                  <span class="font-semibold text-[var(--gray-100)]">{edu.institution}</span>
+                  <p class="text-[var(--gray-300)]">
+                    {edu.degree} &nbsp;&middot;&nbsp; {edu.gpa}
+                  </p>
+                </div>
+                <span class="text-[var(--gray-400)] whitespace-nowrap">{edu.period}</span>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="resume-h2">Professional Experience</h2>
+        <div class="space-y-5">
+          {
+            experiences.map((exp) => (
+              <div>
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                  <span class="font-semibold text-[var(--gray-100)] text-sm">
+                    {exp.company} &mdash; {exp.role}
+                  </span>
+                  <span class="text-[var(--gray-400)] text-sm whitespace-nowrap">
+                    {exp.period}
+                  </span>
+                </div>
+                <ul class="list-disc list-outside pl-5 mt-1 space-y-1 text-sm text-[var(--gray-300)]">
+                  {exp.descriptionPoints.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="resume-h2">Academic Projects</h2>
+        <div class="space-y-5">
+          {
+            academicProjects.map((project) => (
+              <div>
+                <div class="flex flex-col sm:flex-row sm:justify-between">
+                  <span class="font-semibold text-[var(--gray-100)] text-sm">
+                    {project.title}
+                  </span>
+                  <span class="text-[var(--gray-400)] text-sm whitespace-nowrap">
+                    {project.year}
+                  </span>
+                </div>
+                <p class="text-xs italic text-[var(--gray-400)]">{project.tags.join(", ")}</p>
+                <ul class="list-disc list-outside pl-5 mt-1 space-y-1 text-sm text-[var(--gray-300)]">
+                  {project.descriptionPoints.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="resume-h2">Technical Skills</h2>
+        <div class="space-y-1 text-sm text-[var(--gray-300)]">
+          {
+            skillGroups.map((group) => (
+              <p>
+                <span class="font-semibold text-[var(--gray-100)]">{group.label}: </span>
+                {group.items.join(", ")}
+              </p>
+            ))
+          }
+        </div>
+      </section>
+
+      <section>
+        <h2 class="resume-h2">Research Papers</h2>
+        <p class="text-sm text-[var(--gray-300)]">
+          {researchPaper.authors}, "{researchPaper.title}," {researchPaper.conference}{" "}
+          <a
+            href={researchPaper.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[var(--emerald-400)] hover:underline">IEEE Link</a
+          >
+        </p>
+      </section>
+    </main>
+
+    <style>
+      .resume-h2 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--emerald-400);
+        border-bottom: 1px solid var(--gray-700);
+        padding-bottom: 0.35rem;
+        margin-bottom: 0.75rem;
+      }
+
+      @media print {
+        .no-print {
+          display: none !important;
+        }
+        body {
+          background: #ffffff !important;
+        }
+        .resume-doc {
+          color: #000 !important;
+          max-width: 100% !important;
+        }
+        .resume-doc h1,
+        .resume-doc .font-semibold {
+          color: #000 !important;
+        }
+        .resume-doc p,
+        .resume-doc li,
+        .resume-doc span {
+          color: #111 !important;
+        }
+        .resume-h2 {
+          color: #000 !important;
+          border-bottom-color: #999 !important;
+        }
+      }
+    </style>
+
+    <script>
+      document.getElementById("print-button")?.addEventListener("click", () => {
+        window.print();
+      });
+    </script>
+  </body>
+</html>

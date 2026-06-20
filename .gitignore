@@ -1,5 +1,8 @@
 # build output
 dist/
+
+# raw/unprocessed asset staging (optimized copies live in public/images)
+assets-raw/
 # generated types
 .astro/
 
