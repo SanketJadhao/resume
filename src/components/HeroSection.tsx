@@ -4,7 +4,7 @@ const name = "Sanket Jadhao";
 const mainTitle = "A Software Engineer.";
 const tagline =
   "Mainly working in the Python and JavaScript ecosystem, I'm a dedicated problem-solver who thrives on learning and building impactful software solutions.";
-const githubUrl = "https://github.com/Ghost-13302";
+const githubUrl = "https://github.com/SanketJadhao";
 const linkedinUrl = "https://linkedin.com/in/sanket-jadhao/";
 const email = "sanketjadhao2002@gmail.com";
 
