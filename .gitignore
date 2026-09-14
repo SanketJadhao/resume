@@ -1,5 +1,6 @@
 # build output
 dist/
+.netlify/
 
 # raw/unprocessed asset staging (optimized copies live in public/images)
 assets-raw/
