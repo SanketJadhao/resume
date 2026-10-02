@@ -15,6 +15,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "Santra Sheti Margdarshak",
+    category: "Personal Project",
+    year: "2026",
+    tags: ["Flutter", "Dart", "SQLite FTS5", "YouTube IFrame API"],
+    descriptionPoints: [
+      "Built a free, fully offline Marathi-language farming guide app for orange (santra) growers in Vidarbha, Maharashtra, published to Google Play.",
+      "Authored from an agricultural reference and reviewed/corrected across multiple passes by my father, an orange farmer, covering cultivation, irrigation, fertilizer scheduling, and a 20+ entry pest/disease field guide.",
+      "Implemented on-device full-text search over Marathi content using SQLite FTS5, since Android's bundled SQLite doesn't reliably ship FTS5 support.",
+    ],
+  },
+  {
     title: "Skedaddle",
     category: "Personal Project",
     year: "2026",
