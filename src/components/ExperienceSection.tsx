@@ -46,8 +46,11 @@ export default function ExperienceSection() {
                 </div>
                 <div className="md:w-2/3">
                   <ul className="list-disc list-outside space-y-3 text-[var(--gray-400)] pl-5 marker:text-[var(--gray-600)]">
-                    {exp.descriptionPoints.map((point) => (
-                      <li key={point}>{point}</li>
+                    {exp.descriptionPoints.map((point, j) => (
+                      // Phones show the two headline points; the full list is on the resume page.
+                      <li key={point} className={j > 1 ? "max-md:hidden" : undefined}>
+                        {point}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -55,6 +58,11 @@ export default function ExperienceSection() {
             ))}
           </motion.div>
         </div>
+        <a
+          href="/resume"
+          className="md:hidden inline-flex items-center gap-2 mt-12 px-6 py-3 rounded-full border border-white/20 text-white font-medium">
+          Full details on my resume &rarr;
+        </a>
       </div>
     </motion.section>
   );

@@ -14,6 +14,9 @@ const skillGroups = [
   { label: "ML/DS", items: skills.mlAndDataScience },
   { label: "Tools", items: skills.tools },
 ];
+
+// The one-page PDF version of this resume, served from public/.
+const pdfPath = "/Sanket_Jadhao_Resume.pdf";
 ---
 
 <!doctype html>
@@ -32,39 +35,62 @@ const skillGroups = [
     />
   </head>
   <body class="antialiased bg-[var(--gray-900)]">
-    <div class="no-print sticky top-0 z-50 bg-[var(--gray-900)]/90 backdrop-blur-md border-b border-[var(--gray-700)] py-3">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <a href="/" class="text-sm font-semibold text-[var(--emerald-400)] hover:underline">
-          ← Back to Portfolio
+    <!-- Floating pill bar, matching the main site's header. -->
+    <div class="no-print fixed top-3 inset-x-0 z-50 px-3">
+      <div
+        class="container mx-auto max-w-4xl flex items-center justify-between h-14 pl-2 pr-2 rounded-full bg-[#161616]/70 backdrop-blur-xl border border-white/10">
+        <a
+          href="/"
+          class="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium text-[var(--gray-300)] hover:bg-white/10 hover:text-white transition-colors">
+          &larr; Portfolio
         </a>
-        <button
-          id="print-button"
-          class="px-4 py-2 text-sm rounded-lg font-semibold bg-[var(--emerald-600)] text-white hover:bg-[var(--emerald-500)] transition-colors">
-          Print / Save as PDF
-        </button>
+        <a
+          href={pdfPath}
+          download="Sanket_Jadhao_Resume.pdf"
+          class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-sm font-medium hover:bg-[var(--gray-200)] transition-colors">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Download PDF
+        </a>
       </div>
     </div>
 
-    <main class="resume-doc container mx-auto px-4 sm:px-6 lg:px-8 py-10 max-w-4xl">
-      <header class="text-center mb-8">
-        <h1 class="text-3xl sm:text-4xl font-bold text-[var(--gray-100)]">Sanket Jadhao</h1>
-        <p class="text-sm text-[var(--gray-400)] mt-2">
-          Gainesville, FL-32608 (Relocatable) |
-          <a href="mailto:sanketjadhao2002@gmail.com" class="hover:text-[var(--emerald-400)]"
+    <main class="resume-doc container mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 max-w-4xl">
+      <header class="mb-14">
+        <h1 class="text-5xl md:text-7xl font-medium text-white leading-[0.95]">Sanket Jadhao</h1>
+        <p class="text-3xl md:text-5xl font-medium text-[var(--gray-600)] leading-[0.95] mt-1">
+          Software Engineer.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-8 text-sm">
+          <span class="resume-pill">Gainesville, FL (Relocatable)</span>
+          <a href="mailto:sanketjadhao2002@gmail.com" class="resume-pill hover:bg-white/10"
             >sanketjadhao2002@gmail.com</a
-          > |
+          >
           <a
             href="https://linkedin.com/in/sanket-jadhao/"
             target="_blank"
             rel="noopener noreferrer"
-            class="hover:text-[var(--emerald-400)]">LinkedIn</a
+            class="resume-pill hover:bg-white/10">LinkedIn &nearr;</a
           >
-        </p>
+        </div>
       </header>
 
-      <section class="mb-6">
-        <h2 class="resume-h2">Introduction</h2>
-        <p class="text-[var(--gray-300)] text-sm leading-relaxed">
+      <section class="mb-14">
+        <h2 class="resume-label">Introduction</h2>
+        <p class="text-xl md:text-2xl text-[var(--gray-200)] leading-snug">
           Software Engineer with a Master's in Computer Science from University of Florida.
           Shipped production work across mobile, backend, and full-stack. Comfortable across
           Flutter, Kotlin, Python, and Golang. Looking for roles where engineering directly
@@ -72,116 +98,140 @@ const skillGroups = [
         </p>
       </section>
 
-      <section class="mb-6">
-        <h2 class="resume-h2">Education</h2>
-        <div class="space-y-2">
-          {
-            education.map((edu) => (
-              <div class="flex flex-col sm:flex-row sm:justify-between text-sm">
-                <div>
-                  <span class="font-semibold text-[var(--gray-100)]">{edu.institution}</span>
-                  <p class="text-[var(--gray-300)]">
-                    {edu.degree} &nbsp;&middot;&nbsp; {edu.gpa}
-                  </p>
-                </div>
-                <span class="text-[var(--gray-400)] whitespace-nowrap">{edu.period}</span>
-              </div>
-            ))
-          }
-        </div>
-      </section>
-
-      <section class="mb-6">
-        <h2 class="resume-h2">Professional Experience</h2>
-        <div class="space-y-5">
+      <section class="mb-14">
+        <h2 class="resume-label">Professional Experience</h2>
+        <div class="space-y-4">
           {
             experiences.map((exp) => (
-              <div>
-                <div class="flex flex-col sm:flex-row sm:justify-between">
-                  <span class="font-semibold text-[var(--gray-100)] text-sm">
-                    {exp.company} &mdash; {exp.role}
-                  </span>
-                  <span class="text-[var(--gray-400)] text-sm whitespace-nowrap">
-                    {exp.period}
-                  </span>
+              <article class="resume-card">
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-4">
+                  <div>
+                    <h3 class="text-2xl font-medium text-white">{exp.company}</h3>
+                    <p class="text-[var(--gray-300)]">
+                      {exp.role} <span class="text-[var(--gray-500)]">· {exp.location}</span>
+                    </p>
+                  </div>
+                  <span class="text-sm text-[var(--gray-500)] whitespace-nowrap">{exp.period}</span>
                 </div>
-                <ul class="list-disc list-outside pl-5 mt-1 space-y-1 text-sm text-[var(--gray-300)]">
+                <ul class="list-disc list-outside pl-5 space-y-2 text-[var(--gray-400)] marker:text-[var(--gray-600)]">
                   {exp.descriptionPoints.map((point) => (
                     <li>{point}</li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))
           }
         </div>
       </section>
 
-      <section class="mb-6">
-        <h2 class="resume-h2">Academic Projects</h2>
-        <div class="space-y-5">
+      <section class="mb-14">
+        <h2 class="resume-label">Education</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {
+            education.map((edu) => (
+              <article class="resume-card">
+                <h3 class="text-xl font-medium text-white">{edu.institution}</h3>
+                <p class="text-[var(--gray-300)] mt-1">{edu.degree}</p>
+                <p class="text-sm text-[var(--gray-500)] mt-3">
+                  {edu.period} · {edu.gpa}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mb-14">
+        <h2 class="resume-label">Academic Projects</h2>
+        <div class="space-y-4">
           {
             academicProjects.map((project) => (
-              <div>
-                <div class="flex flex-col sm:flex-row sm:justify-between">
-                  <span class="font-semibold text-[var(--gray-100)] text-sm">
-                    {project.title}
-                  </span>
-                  <span class="text-[var(--gray-400)] text-sm whitespace-nowrap">
-                    {project.year}
-                  </span>
+              <article class="resume-card">
+                <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-3">
+                  <h3 class="text-2xl font-medium text-white">{project.title}</h3>
+                  <span class="text-sm text-[var(--gray-500)] whitespace-nowrap">{project.year}</span>
                 </div>
-                <p class="text-xs italic text-[var(--gray-400)]">{project.tags.join(", ")}</p>
-                <ul class="list-disc list-outside pl-5 mt-1 space-y-1 text-sm text-[var(--gray-300)]">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  {project.tags.map((tag) => (
+                    <span class="text-xs font-medium px-3 py-1 rounded-full border border-white/15 text-[var(--gray-300)]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <ul class="list-disc list-outside pl-5 space-y-2 text-[var(--gray-400)] marker:text-[var(--gray-600)]">
                   {project.descriptionPoints.map((point) => (
                     <li>{point}</li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))
           }
         </div>
       </section>
 
-      <section class="mb-6">
-        <h2 class="resume-h2">Technical Skills</h2>
-        <div class="space-y-1 text-sm text-[var(--gray-300)]">
+      <section class="mb-14">
+        <h2 class="resume-label">Technical Skills</h2>
+        <div class="divide-y divide-white/10 border-y border-white/10">
           {
             skillGroups.map((group) => (
-              <p>
-                <span class="font-semibold text-[var(--gray-100)]">{group.label}: </span>
-                {group.items.join(", ")}
-              </p>
+              <div class="grid sm:grid-cols-[9rem_1fr] gap-3 py-5">
+                <h3 class="font-medium text-[var(--gray-300)]">{group.label}</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  {group.items.map((item) => (
+                    <span class="text-sm px-3 py-1 rounded-full border border-white/15 text-[var(--gray-200)]">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))
           }
         </div>
       </section>
 
       <section>
-        <h2 class="resume-h2">Research Papers</h2>
-        <p class="text-sm text-[var(--gray-300)]">
-          {researchPaper.authors}, "{researchPaper.title}," {researchPaper.conference}{" "}
+        <h2 class="resume-label">Research Papers</h2>
+        <article class="resume-card">
+          <h3 class="text-xl font-medium text-white">{researchPaper.title}</h3>
+          <p class="text-[var(--gray-400)] italic mt-1">{researchPaper.authors}</p>
+          <p class="text-sm text-[var(--gray-500)] mt-1">{researchPaper.conference}</p>
           <a
             href={researchPaper.link}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-[var(--emerald-400)] hover:underline">IEEE Link</a
+            class="inline-block mt-4 text-sm font-medium text-[var(--emerald-400)] hover:underline"
+            >View on IEEE Xplore &nearr;</a
           >
-        </p>
+        </article>
       </section>
     </main>
 
     <style>
-      .resume-h2 {
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
+      .resume-label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--emerald-400);
-        border-bottom: 1px solid var(--gray-700);
-        padding-bottom: 0.35rem;
-        margin-bottom: 0.75rem;
+        margin-bottom: 1.25rem;
       }
 
+      .resume-card {
+        background: var(--gray-800);
+        border: 1px solid rgb(255 255 255 / 0.1);
+        border-radius: 28px;
+        padding: 1.75rem;
+      }
+
+      .resume-pill {
+        padding: 0.4rem 0.9rem;
+        border-radius: 9999px;
+        border: 1px solid rgb(255 255 255 / 0.15);
+        color: var(--gray-300);
+        transition: background-color 0.2s;
+      }
+
+      /* Printing from the browser still gives a clean black-on-white page. */
       @media print {
         .no-print {
           display: none !important;
@@ -190,29 +240,24 @@ const skillGroups = [
           background: #ffffff !important;
         }
         .resume-doc {
-          color: #000 !important;
+          padding-top: 0 !important;
           max-width: 100% !important;
         }
-        .resume-doc h1,
-        .resume-doc .font-semibold {
-          color: #000 !important;
-        }
-        .resume-doc p,
-        .resume-doc li,
-        .resume-doc span {
+        .resume-doc * {
           color: #111 !important;
+          border-color: #ccc !important;
         }
-        .resume-h2 {
+        .resume-card {
+          background: none !important;
+          border: none !important;
+          padding: 0.5rem 0 !important;
+        }
+        .resume-label {
           color: #000 !important;
-          border-bottom-color: #999 !important;
+          border-bottom: 1px solid #999;
+          padding-bottom: 0.25rem;
         }
       }
     </style>
-
-    <script>
-      document.getElementById("print-button")?.addEventListener("click", () => {
-        window.print();
-      });
-    </script>
   </body>
 </html>

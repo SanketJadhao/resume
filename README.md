@@ -1,51 +1,72 @@
-# Sanket Jadhao - Personal Portfolio Website
+# Sanket Jadhao — Portfolio
 
-This is the repository for my personal portfolio website, showcasing my skills, experience, projects, and education. It's built with Astro and styled with Tailwind CSS, featuring a modern, dark-themed, responsive design.
+Personal portfolio and resume site for Sanket Jadhao, Software Engineer.
 
-### Live Demo: https://sanketjadhao.netlify.app/
+**Live site:** https://sanketjadhao.netlify.app/
 
-## ✨ Features
+## Overview
 
-- **Modern Dark Theme**: A sleek, professional dark aesthetic with emerald green accents, inspired by contemporary design trends.
-- **Responsive Design**: Fully responsive layout, ensuring optimal viewing and usability on all devices (mobile, tablet, desktop).
-- **Single-Page Application (SPA) Feel**: Smooth scrolling navigation to different sections of the page.
-- **Interactive Header**:
-  --**Desktop**: Icon-based navigation with text tooltips on hover.
-  --**Mobile**: Clear text-based navigation in a collapsible menu.
-  --**Dynamic Hero Section**: Full-screen hero area with an "Available for projects" badge and links to social profiles and resume.
-- **Detailed Sections**:
-  --**About Me**: A brief introduction.
-  --**Professional Experience**: Detailed accounts of internships and roles.
-  --**Projects**: Showcase of university and personal projects with technologies used.
-  --**Technical Skills**: Categorized list of programming languages, tools, and frameworks.
-  --**Education & Research**: Academic background and published research.
-  --**Contact**: Easy ways to get in touch.
-- **Performance Optimized**: Built with Astro for speed and optimized for good Lighthouse scores.
-- **SEO Friendly**: Basic SEO best practices implemented.
-- **Accessibility Considerations**: Attention to contrast and descriptive links.
+A fast, fully static site that presents my experience, projects, skills, education, and research. It uses a dark visual design with looping 3D renders, scroll-driven animation, and a layout built separately for desktop and mobile.
 
-## 🛠️ Tech Stack
+- **Home (`/`)**: hero, about, experience, projects, skills, education and research, and contact.
+- **Resume (`/resume`)**: a web version of my resume with a download of the one-page PDF.
 
-- **Framework**: Astro (Static Site Generator)
-- **Styling**: Tailwind CSS (Utility-first CSS framework)
-- **JavaScript**: Vanilla JS for interactivity (mobile menu, smooth scroll).
-- **Deployment**: Netlify (or your preferred hosting platform)
+## Tech Stack
 
-## 📄 Content
+| Area        | Tools                                                      |
+| ----------- | ---------------------------------------------------------- |
+| Framework   | Astro 5 (static output)                                    |
+| UI          | React 19 components hydrated as Astro islands              |
+| Styling     | Tailwind CSS 4                                             |
+| Animation   | Framer Motion                                              |
+| 3D renders  | Blender (exported as looping MP4)                          |
+| Hosting     | Netlify                                                    |
 
-The content for this portfolio (experience, projects, skills, education) is based on my resume. Key sections include:
+## Highlights
 
-- Hero: Introduction and current status.
-- About Me: Brief professional summary.
-- Experience: Details from internships at Snapper Future Tech and Tata Motors.
-- Projects: Including "Research Collaboration Dashboard," "Comparative Law Analysis Using NLP," and "Agile Taskflow Website (WIP)."
-- Skills: Python, Java, JavaScript (ReactJS), Solidity, Angular, TensorFlow, Android Studio, etc.
-- Education: Master's from the University of Florida and Bachelor's from MIT-WPU University.
-- Research: "Malware Analysis Using Machine Learning Techniques."
-- The resume is served as a printable page at `/resume` (src/pages/resume.astro), built from the data in src/data/.
+- **Looping 3D hero**: a pre-rendered glass phone that loops seamlessly, with separate landscape and portrait cuts that switch with the screen shape.
+- **Project visuals**: each project card has its own short looping render, played only while it is on screen.
+- **Mobile layout**: centred hero, stacked project cards, and a pinned resume button on phones.
+- **Accessibility**: keyboard-operable screenshot gallery, reduced-motion support (still images instead of video), and content that stays visible without JavaScript.
+- **Data-driven content**: the homepage and resume page read from the same data files, so they stay in sync.
 
-## 📞 Contact
+## Project Structure
 
-**Email**: sanketjadhao2002@gmail.com
-**LinkedIn**: linkedin.com/in/sanket-jadhao/
-Feel free to explore the code, and if you have any questions or suggestions, please open an issue!
+```text
+src/
+  components/   Page sections (Hero, About, Experience, Projects, ...) and shared pieces
+  data/         Experience, education, projects, and skills content
+  layouts/      Base page layout
+  pages/        index, resume, and the app privacy policy page
+  styles/       Global styles and theme colours
+public/
+  videos/       Hero and project-card renders
+  Sanket_Jadhao_Resume.pdf
+```
+
+## Getting Started
+
+Requires Node.js 22 or later.
+
+```bash
+npm ci
+npm run dev       # local development at http://localhost:4321
+npm run build     # production build into dist/
+npm run preview   # serve the production build locally
+```
+
+## Updating Content
+
+Text content lives in `src/data/`:
+
+- `experience.ts` for roles and responsibilities
+- `projects.ts` for projects, tags, screenshots, and which render each card uses
+- `education.ts` for degrees and the research paper
+- `skills.ts` for skill groups
+
+The downloadable resume is `public/Sanket_Jadhao_Resume.pdf`; replace that file to update it.
+
+## Contact
+
+- Email: sanketjadhao2002@gmail.com
+- LinkedIn: https://www.linkedin.com/in/sanket-jadhao/

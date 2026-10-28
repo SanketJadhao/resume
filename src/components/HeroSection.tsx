@@ -1,4 +1,12 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+
+// Portrait or near-square screens get the tall cut with the phone centred; wider ones the landscape cut.
+const PORTRAIT_QUERY = "(max-aspect-ratio: 5/4)";
+const HERO_VIDEOS = {
+  portrait: { src: "/videos/hero-mobile.mp4", poster: "/videos/hero-mobile-poster.webp" },
+  landscape: { src: "/videos/hero.mp4", poster: "/videos/hero-poster.webp" },
+};
 
 const name = "Sanket Jadhao";
 const mainTitle = "A Software Engineer.";
@@ -9,31 +17,28 @@ const linkedinUrl = "https://linkedin.com/in/sanket-jadhao/";
 const email = "sanketjadhao2002@gmail.com";
 
 export default function HeroSection() {
+  // <source media> is only checked when the page loads, so swap cuts ourselves when the screen
+  // shape changes (a resized window, or a tablet rotating).
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const query = window.matchMedia(PORTRAIT_QUERY);
+    const applyCut = () => {
+      const video = videoRef.current;
+      const cut = query.matches ? HERO_VIDEOS.portrait : HERO_VIDEOS.landscape;
+      if (!video || video.currentSrc.endsWith(cut.src)) return;
+      video.poster = cut.poster;
+      video.src = cut.src;
+      video.play().catch(() => {});
+    };
+    applyCut();
+    query.addEventListener("change", applyCut);
+    return () => query.removeEventListener("change", applyCut);
+  }, []);
+
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col landscape-wide:justify-center hero-background px-6 pb-16 landscape-wide:pt-28 landscape-wide:pb-6 text-left relative overflow-hidden">
-      {/* Looping 3D render. Narrow or portrait screens get the tall cut in the top part, with the text below.
-          object-contain never crops the phone; the render's black background blends into the page. */}
-      <video
-        className="absolute inset-x-0 top-0 w-full h-[62svh] landscape-wide:h-svh object-contain object-top landscape-wide:object-right pointer-events-none motion-reduce:hidden"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/videos/hero-poster.webp"
-        aria-hidden="true">
-        <source src="/videos/hero-mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 5/4)" />
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
-      <img
-        src="/videos/hero-poster.webp"
-        alt=""
-        className="absolute inset-x-0 top-0 w-full h-[62svh] landscape-wide:h-svh object-contain object-top landscape-wide:object-right hidden motion-reduce:block"
-      />
-      <div className="absolute inset-x-0 top-0 h-[62svh] bg-gradient-to-t from-black via-transparent to-transparent landscape-wide:h-svh landscape-wide:bg-gradient-to-r landscape-wide:from-black landscape-wide:via-black/40 landscape-wide:to-transparent pointer-events-none" />
-      <div className="h-[46svh] shrink-0 landscape-wide:hidden" aria-hidden="true" />
-
+      className="landscape-wide:min-h-screen flex flex-col landscape-wide:justify-center hero-background px-6 pt-28 pb-2 landscape-wide:pb-6 text-center landscape-wide:text-left relative overflow-hidden">
       <motion.div
         className="relative z-10 container mx-auto max-w-6xl"
         initial={{ opacity: 0, y: 30 }}
@@ -47,18 +52,19 @@ export default function HeroSection() {
           />
           Looking for more opportunities
         </span>
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white mb-2 leading-[0.95] max-w-3xl">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white mb-2 leading-[0.95] max-w-3xl mx-auto landscape-wide:mx-0">
           Hi, I'm <span className="text-[var(--emerald-400)]">{name}</span>.
         </h1>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[var(--gray-600)] mb-8 leading-[0.95]">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[var(--gray-600)] mb-6 landscape-wide:mb-8 leading-[0.95]">
           {mainTitle}
         </h2>
-        <p className="text-lg md:text-xl text-[var(--gray-400)] mb-10 max-w-xl">
+        {/* Phones skip the tagline (About covers it) so the headline and render fit on one screen. */}
+        <p className="hidden landscape-wide:block text-base md:text-xl text-[var(--gray-400)] mb-10 max-w-xl">
           {tagline}
         </p>
 
         <motion.div
-          className="flex justify-start space-x-5 sm:space-x-6 mb-10"
+          className="flex justify-center landscape-wide:justify-start space-x-5 sm:space-x-6 landscape-wide:mb-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}>
@@ -151,7 +157,7 @@ export default function HeroSection() {
 
         <motion.a
           href="#about"
-          className="rounded-full font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--emerald-400)]/50 bg-white text-black hover:bg-[var(--gray-200)] px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg inline-block"
+          className="hidden landscape-wide:inline-block rounded-full font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--emerald-400)]/50 bg-white text-black hover:bg-[var(--gray-200)] px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
@@ -161,6 +167,33 @@ export default function HeroSection() {
           <span className="ml-2">&#8595;</span>
         </motion.a>
       </motion.div>
+
+      {/* Looping 3D render. On portrait screens it sits under the text (like fancy.design's mobile hero);
+          on landscape screens it fills the background on the right. object-contain never crops the phone,
+          and the render's black background blends into the page. */}
+      <div className="relative w-full max-w-md mx-auto aspect-square mt-2 landscape-wide:absolute landscape-wide:inset-0 landscape-wide:h-svh landscape-wide:max-w-none landscape-wide:aspect-auto landscape-wide:mt-0 pointer-events-none">
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-contain landscape-wide:object-right motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={HERO_VIDEOS.landscape.poster}
+          aria-hidden="true">
+          <source src={HERO_VIDEOS.portrait.src} type="video/mp4" media={PORTRAIT_QUERY} />
+          <source src={HERO_VIDEOS.landscape.src} type="video/mp4" />
+        </video>
+        <picture>
+          <source srcSet={HERO_VIDEOS.portrait.poster} media={PORTRAIT_QUERY} />
+          <img
+            src={HERO_VIDEOS.landscape.poster}
+            alt=""
+            className="absolute inset-0 w-full h-full object-contain landscape-wide:object-right hidden motion-reduce:block"
+          />
+        </picture>
+        <div className="absolute inset-0 hidden landscape-wide:block bg-gradient-to-r from-black via-black/40 to-transparent" />
+      </div>
     </section>
   );
 }

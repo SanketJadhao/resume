@@ -19,7 +19,7 @@ export default function AboutSection() {
   return (
     <motion.section
       id="about"
-      className="section-texture py-24 md:py-36 bg-[var(--gray-900)]"
+      className="section-texture pt-12 pb-24 md:py-36 bg-[var(--gray-900)]"
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce}

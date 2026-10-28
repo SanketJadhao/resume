@@ -11,11 +11,14 @@ export interface Project {
   descriptionPoints: string[];
   link?: string;
   screenshots?: Screenshot[];
+  /** Looping 3D render shown on the card, from public/videos/projects/<render>.mp4 */
+  render?: string;
 }
 
 export const projects: Project[] = [
   {
     title: "Santra Sheti Margdarshak",
+    render: "orange",
     category: "Personal Project",
     year: "2026",
     tags: ["Flutter", "Dart", "SQLite FTS5", "YouTube IFrame API"],
@@ -27,6 +30,7 @@ export const projects: Project[] = [
   },
   {
     title: "Skedaddle",
+    render: "tribe",
     category: "Personal Project",
     year: "2026",
     tags: ["Flutter", "Dart", "Firebase", "Groq (Llama 3.3 70B)", "Google Places API"],
@@ -50,6 +54,7 @@ export const projects: Project[] = [
   },
   {
     title: "Skedaddle Carpool",
+    render: "carpool",
     category: "Personal Project",
     year: "2026",
     tags: ["Flutter", "Dart", "Supabase", "Google Maps API", "go_router"],
@@ -61,6 +66,7 @@ export const projects: Project[] = [
   },
   {
     title: "Research Collaboration Dashboard",
+    render: "browser",
     category: "University Project",
     year: "2025",
     tags: ["Angular", "Golang", "JWT", "RESTful APIs", "HTML/CSS"],
@@ -71,6 +77,7 @@ export const projects: Project[] = [
   },
   {
     title: "Comparative Law Analysis Using NLP",
+    render: "neural",
     category: "University Project",
     year: "2024",
     tags: ["Python", "BERT", "GPT-2", "TensorFlow", "Scikit-learn", "Pandas", "NumPy", "BeautifulSoup", "Scrapy"],
@@ -81,6 +88,7 @@ export const projects: Project[] = [
   },
   {
     title: "Agile Taskflow Website",
+    render: "kanban",
     category: "Personal Project",
     year: "",
     tags: ["AstroJS", "Tailwind CSS", "Agile Development", "In Progress"],

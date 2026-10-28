@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 import { fadeUp, staggerContainer, staggerItem, viewportOnce } from "./motion/variants";
 import ScreenshotGallery from "./ScreenshotGallery";
+import LoopVideo from "./LoopVideo";
 
 // Each card gets its own muted colour and a drifting glow, cycling through these.
 const cardColors = [
-  { bg: "#2e2a8f", glow: "#818cf8" },
+  { bg: "#7c2d12", glow: "#fdba74" },
   { bg: "#5b3d4d", glow: "#f9a8d4" },
   { bg: "#064e3b", glow: "#34d399" },
   { bg: "#1e3a5f", glow: "#60a5fa" },
@@ -28,16 +29,18 @@ export default function ProjectsSection() {
           variants={fadeUp}>
           Projects
         </motion.h2>
+        {/* On phones the cards stick and stack like a deck as you scroll (a flex column, since sticky
+            grid items can't leave their own grid cell); tablets and up get the grid. */}
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="flex flex-col gap-5 md:grid md:grid-cols-2 lg:grid-cols-3"
           variants={staggerContainer}>
           {projects.map((project, i) => {
             const color = cardColors[i % cardColors.length];
             return (
               <motion.div
                 key={project.title}
-                className="relative overflow-hidden p-7 rounded-[28px] h-full flex flex-col text-white"
-                style={{ backgroundColor: color.bg }}
+                className="relative overflow-hidden p-7 rounded-[28px] h-full flex flex-col text-white max-md:sticky max-md:shadow-[0_-12px_40px_rgba(0,0,0,0.55)]"
+                style={{ backgroundColor: color.bg, top: `${88 + i * 14}px` }}
                 variants={staggerItem}
                 whileHover={{ y: -6, rotate: -0.5 }}
                 transition={{ duration: 0.25 }}>
@@ -73,13 +76,25 @@ export default function ProjectsSection() {
                     </a>
                   )}
                 </div>
-                <h3 className="relative text-3xl font-medium leading-tight mt-10 mb-4">
+                {project.render && (
+                  // Screen blending drops the render's black background onto the card colour.
+                  <div className="relative h-56 -mx-4 flex items-center justify-center">
+                    <LoopVideo
+                      src={`/videos/projects/${project.render}.mp4`}
+                      className="h-full aspect-square object-contain mix-blend-screen"
+                    />
+                  </div>
+                )}
+                <h3 className={`relative text-3xl font-medium leading-tight mb-4 ${project.render ? "mt-2" : "mt-10"}`}>
                   {project.title}
                 </h3>
                 {project.descriptionPoints && (
                   <ul className="relative list-disc list-outside space-y-2 text-sm text-white/75 pl-5 mb-5">
-                    {project.descriptionPoints.map((point) => (
-                      <li key={point}>{point}</li>
+                    {project.descriptionPoints.map((point, j) => (
+                      // Phones show just the first point so each stacked card fits on screen.
+                      <li key={point} className={j > 0 ? "max-md:hidden" : undefined}>
+                        {point}
+                      </li>
                     ))}
                   </ul>
                 )}
