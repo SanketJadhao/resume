@@ -61,7 +61,7 @@ const navItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class="relative flex items-center justify-center p-3 rounded-full text-[var(--gray-400)] hover:bg-[var(--gray-700)] hover:text-[var(--emerald-300)] transition-all duration-200"
+              class="group relative flex items-center justify-center p-3 rounded-full text-[var(--gray-400)] hover:bg-[var(--gray-700)] hover:text-[var(--emerald-300)] transition-all duration-200"
               aria-label={item.label}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@ const navItems = [
                   d={item.iconSvgPath}
                 />
               </svg>
-              <span class="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[var(--gray-700)] text-[var(--emerald-300)] text-xs px-2.5 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+              <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[var(--gray-700)] text-[var(--emerald-300)] text-xs px-2.5 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                 {item.label}
               </span>
             </a>

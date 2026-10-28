@@ -3,7 +3,6 @@ import { fadeUp, staggerContainer, staggerItem, viewportOnce } from "./motion/va
 
 const contactInfo = {
   email: "sanketjadhao2002@gmail.com",
-  phone: "(352) 709-0771",
   linkedinUrl: "https://www.linkedin.com/in/sanket-jadhao/",
   tagline:
     "I'm actively seeking new opportunities and collaborations. If you have an interesting project or just want to connect, please don't hesitate to reach out!",
@@ -45,9 +44,6 @@ export default function ContactSection() {
             LinkedIn Profile
           </a>
         </motion.div>
-        <motion.p className="text-[var(--emerald-100)] text-md mt-8" variants={fadeUp}>
-          Phone: {contactInfo.phone}
-        </motion.p>
       </div>
     </motion.section>
   );
