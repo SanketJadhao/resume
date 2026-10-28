@@ -46,22 +46,24 @@ const navItems = [
 ];
 ---
 
-<header
-  class="bg-[var(--gray-900)]/70 backdrop-blur-md shadow-lg sticky top-0 z-50">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      <div class="flex items-center">
-        <a href="#hero" class="text-2xl font-bold text-[var(--emerald-400)]"
-          >Sanket Jadhao</a
+<header class="fixed top-3 inset-x-0 z-50 px-3">
+  <div class="container mx-auto max-w-5xl">
+    <div
+      class="flex items-center justify-between h-14 pl-2 pr-2 rounded-full bg-[#161616]/70 backdrop-blur-xl border border-white/10">
+      <a href="#hero" class="flex items-center gap-2.5">
+        <span
+          class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[var(--emerald-400)] to-[var(--violet-500)] text-sm font-semibold text-black"
+          >SJ</span
         >
-      </div>
-      <nav class="hidden md:flex items-center space-x-2">
+        <span class="text-sm font-semibold tracking-wide text-white uppercase">Sanket Jadhao</span>
+      </a>
+      <nav class="hidden md:flex items-center space-x-1">
         {/* Adjusted spacing for icons */}
         {
           navItems.map((item) => (
             <a
               href={item.href}
-              class="group relative flex items-center justify-center p-3 rounded-full text-[var(--gray-400)] hover:bg-[var(--gray-700)] hover:text-[var(--emerald-300)] transition-all duration-200"
+              class="group relative flex items-center justify-center p-2.5 rounded-full text-[var(--gray-400)] hover:bg-white/10 hover:text-white transition-all duration-200"
               aria-label={item.label}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,17 +78,22 @@ const navItems = [
                   d={item.iconSvgPath}
                 />
               </svg>
-              <span class="absolute top-full mt-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[var(--gray-700)] text-[var(--emerald-300)] text-xs px-2.5 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+              <span class="absolute top-full mt-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#161616] border border-white/10 text-white text-xs px-2.5 py-1 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                 {item.label}
               </span>
             </a>
           ))
         }
+        <a
+          href="#contact"
+          class="ml-2 px-5 py-2.5 rounded-full bg-white text-black text-sm font-medium hover:bg-[var(--gray-200)] transition-colors"
+          >Contact</a
+        >
       </nav>
       <div class="md:hidden">
         <button
           id="mobile-menu-button"
-          class="text-[var(--gray-300)] hover:text-[var(--emerald-400)] focus:outline-none p-2 rounded-md"
+          class="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white focus:outline-none"
           aria-controls="mobile-menu"
           aria-expanded="false"
           aria-label="Toggle mobile menu">
@@ -107,13 +114,13 @@ const navItems = [
   </div>
   <div
     id="mobile-menu"
-    class="md:hidden hidden bg-[var(--gray-800)] shadow-lg border-t border-[var(--gray-700)]">
+    class="md:hidden hidden mt-2 rounded-3xl bg-[#161616]/90 backdrop-blur-xl border border-white/10">
     <nav class="flex flex-col space-y-1 px-2 pt-2 pb-3">
       {
         navItems.map((item) => (
           <a
             href={item.href}
-            class="block px-3 py-3 rounded-md text-base font-medium text-[var(--gray-200)] hover:bg-[var(--gray-700)] hover:text-[var(--emerald-300)] transition-colors">
+            class="block px-4 py-3 rounded-2xl text-lg font-medium text-[var(--gray-200)] hover:bg-white/10 hover:text-white transition-colors">
             {item.label}
           </a>
         ))

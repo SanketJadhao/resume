@@ -12,26 +12,28 @@ export default function ContactSection() {
   return (
     <motion.section
       id="contact"
-      className="py-16 md:py-24 bg-[var(--emerald-700)] text-white"
+      className="py-24 md:py-32 bg-[var(--gray-900)] text-white px-4 sm:px-6 lg:px-8"
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce}
       variants={staggerContainer}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.h2 className="text-3xl font-bold mb-6 text-white" variants={fadeUp}>
+      <div className="relative overflow-hidden container mx-auto max-w-6xl rounded-[36px] bg-[var(--gray-800)] border border-white/10 px-8 py-20 md:px-16 md:py-28">
+        <span className="card-glow -left-20 -top-28 bg-[var(--emerald-500)]" />
+        <span className="card-glow -right-24 -bottom-28 bg-[var(--violet-500)]" style={{ animationDelay: "-4s" }} />
+        <motion.h2 className="relative text-5xl md:text-7xl font-medium mb-6 text-white leading-[0.95]" variants={fadeUp}>
           Get In Touch
         </motion.h2>
         <motion.p
-          className="text-lg text-[var(--emerald-100)] mb-10 max-w-xl mx-auto"
+          className="relative text-lg md:text-xl text-[var(--gray-300)] mb-10 max-w-xl"
           variants={fadeUp}>
           {contactInfo.tagline}
         </motion.p>
         <motion.div
-          className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
+          className="relative flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-3"
           variants={staggerItem}>
           <motion.a
             href={`mailto:${contactInfo.email}`}
-            className="rounded-lg font-semibold transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--emerald-400)] focus:ring-opacity-50 bg-white text-[var(--emerald-700)] hover:bg-[var(--emerald-100)]/90 px-8 py-3 text-lg shadow-xl"
+            className="rounded-full font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--emerald-400)]/50 bg-white text-black hover:bg-[var(--gray-200)] px-8 py-4 text-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}>
             Email Me
@@ -40,7 +42,7 @@ export default function ContactSection() {
             href={contactInfo.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--emerald-100)] hover:text-white underline text-lg font-medium">
+            className="rounded-full border border-white/20 hover:bg-white/10 px-8 py-4 text-lg font-medium transition-colors">
             LinkedIn Profile
           </a>
         </motion.div>

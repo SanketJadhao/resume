@@ -6,28 +6,28 @@ export default function EducationSection() {
   return (
     <motion.section
       id="education"
-      className="section-texture py-16 md:py-20 bg-[var(--gray-800)]/50"
+      className="section-texture py-24 md:py-32 bg-[var(--gray-900)]"
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce}
       variants={staggerContainer}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <motion.h2
-          className="text-4xl font-bold text-[var(--emerald-400)] mb-12 text-center"
+          className="text-5xl md:text-7xl font-medium text-white mb-16"
           variants={fadeUp}>
           Education & Research
         </motion.h2>
         <motion.div
-          className="space-y-8 max-w-3xl mx-auto mb-12"
+          className="grid md:grid-cols-2 gap-5 mb-5"
           variants={staggerContainer}>
           {education.map((edu) => (
             <motion.div
               key={edu.degree}
-              className="bg-[var(--gray-800)] p-6 rounded-xl shadow-lg"
+              className="bg-[var(--gray-800)] border border-white/10 p-8 rounded-[28px]"
               variants={staggerItem}
-              whileHover={{ y: -4, scale: 1.005, boxShadow: "0 10px 30px -10px rgba(16,185,129,0.25)" }}
+              whileHover={{ y: -4 }}
               transition={{ duration: 0.25 }}>
-              <h3 className="text-xl font-semibold text-[var(--gray-100)]">
+              <h3 className="text-2xl font-medium text-[var(--gray-100)] mb-2">
                 {edu.degree}
               </h3>
               <p className="text-md text-[var(--gray-300)]">{edu.institution}</p>
@@ -37,11 +37,11 @@ export default function EducationSection() {
           ))}
         </motion.div>
         <motion.div
-          className="max-w-3xl mx-auto bg-[var(--gray-800)] p-6 rounded-xl shadow-lg"
+          className="bg-[var(--gray-800)] border border-white/10 p-8 rounded-[28px]"
           variants={staggerItem}
-          whileHover={{ y: -4, scale: 1.005, boxShadow: "0 10px 30px -10px rgba(16,185,129,0.25)" }}
+          whileHover={{ y: -4 }}
           transition={{ duration: 0.25 }}>
-          <h3 className="text-xl font-semibold text-[var(--gray-100)] mb-1">
+          <h3 className="text-sm font-medium uppercase tracking-[0.2em] text-[var(--emerald-400)] mb-3">
             Research Paper
           </h3>
           <h4 className="text-lg font-medium text-[var(--gray-200)]">

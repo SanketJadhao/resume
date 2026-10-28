@@ -2,6 +2,9 @@
 
 @import "tailwindcss";
 
+/* Screens wider than 5:4 get the landscape hero video; the hero layout follows the same split. */
+@custom-variant landscape-wide (@media (min-aspect-ratio: 5/4));
+
 :root {
   --emerald-100: #d1fae5;
   --emerald-300: #6ee7b7;
@@ -10,16 +13,20 @@
   --emerald-600: #059669;
   --emerald-700: #047857;
 
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-  --dark-base: #0d1117;
+  --violet-500: #8b5cf6;
+  --pink-500: #ec4899;
+
+  /* Neutral (no blue tint) grays on a pure black base. */
+  --gray-100: #fafafa;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #404040;
+  --gray-700: #262626;
+  --gray-800: #111111;
+  --gray-900: #000000;
+  --dark-base: #000000;
 }
 
 body {
@@ -32,39 +39,44 @@ html {
   scroll-behavior: smooth;
 }
 
+h1,
+h2,
+h3 {
+  letter-spacing: -0.03em;
+}
+
 .hero-background {
   background-color: var(--dark-base);
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(16, 185, 129, 0.18),
-      transparent 45%
-    ),
-    radial-gradient(circle at 80% 75%, rgba(59, 130, 246, 0.09), transparent 50%),
-    radial-gradient(circle at 50% 105%, rgba(16, 185, 129, 0.1), transparent 60%),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 100%);
 }
 
 .section-texture {
-  background-image: radial-gradient(
-      circle at 12% 15%,
-      rgba(16, 185, 129, 0.07),
-      transparent 38%
-    ),
-    radial-gradient(circle at 88% 85%, rgba(59, 130, 246, 0.06), transparent 42%);
+  background-image: none;
 }
 
 .social-icon-link:hover {
   transform: scale(1.1) translateY(-1px);
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 999;
+/* Slow-moving colour glow used on project and contact cards. */
+.card-glow {
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.55;
   pointer-events: none;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  background-size: 160px 160px;
+  animation: card-glow-drift 10s ease-in-out infinite alternate;
+}
+
+@keyframes card-glow-drift {
+  to {
+    transform: translate(3rem, -2rem) scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-glow {
+    animation: none;
+  }
 }

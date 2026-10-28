@@ -73,7 +73,7 @@ export const projects: Project[] = [
     title: "Comparative Law Analysis Using NLP",
     category: "University Project",
     year: "2024",
-    tags: ["Python", "BERT", "GPT-2", "TensorFlow", "Scikit-learn"],
+    tags: ["Python", "BERT", "GPT-2", "TensorFlow", "Scikit-learn", "Pandas", "NumPy", "BeautifulSoup", "Scrapy"],
     descriptionPoints: [
       "Developed an NLP system (BERT, GPT-2) to compare legal frameworks by analyzing 1,000+ documents, achieving 85% accuracy in identifying similarities/differences.",
       "Scraped and processed 500+ web pages (Justia); identified 3 key areas of legal divergence, contributing to AI research in law.",

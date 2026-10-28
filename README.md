@@ -42,7 +42,7 @@ The content for this portfolio (experience, projects, skills, education) is base
 - Skills: Python, Java, JavaScript (ReactJS), Solidity, Angular, TensorFlow, Android Studio, etc.
 - Education: Master's from the University of Florida and Bachelor's from MIT-WPU University.
 - Research: "Malware Analysis Using Machine Learning Techniques."
-- The resume PDF (**Sanket_Jadhao_Resume.pdf**) is located in the public/ directory and linked from the site.
+- The resume is served as a printable page at `/resume` (src/pages/resume.astro), built from the data in src/data/.
 
 ## 📞 Contact
 

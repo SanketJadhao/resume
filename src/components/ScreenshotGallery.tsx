@@ -62,7 +62,7 @@ export default function ScreenshotGallery({ screenshots }: { screenshots: Screen
           setActiveIndex(0);
           setIsOpen(true);
         }}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-[var(--emerald-700)]/40 text-[var(--emerald-300)] border border-[var(--emerald-500)]/30 hover:bg-[var(--emerald-700)]/60 transition-colors duration-200">
+        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-white text-black hover:bg-[var(--gray-200)] transition-colors duration-200">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

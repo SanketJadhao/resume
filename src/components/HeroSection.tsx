@@ -12,13 +12,34 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center hero-background py-6 p-6 text-center relative overflow-hidden">
+      className="min-h-screen flex flex-col landscape-wide:justify-center hero-background px-6 pb-16 landscape-wide:pt-28 landscape-wide:pb-6 text-left relative overflow-hidden">
+      {/* Looping 3D render. Narrow or portrait screens get the tall cut in the top part, with the text below.
+          object-contain never crops the phone; the render's black background blends into the page. */}
+      <video
+        className="absolute inset-x-0 top-0 w-full h-[62svh] landscape-wide:h-svh object-contain object-top landscape-wide:object-right pointer-events-none motion-reduce:hidden"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/videos/hero-poster.webp"
+        aria-hidden="true">
+        <source src="/videos/hero-mobile.mp4" type="video/mp4" media="(max-aspect-ratio: 5/4)" />
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+      <img
+        src="/videos/hero-poster.webp"
+        alt=""
+        className="absolute inset-x-0 top-0 w-full h-[62svh] landscape-wide:h-svh object-contain object-top landscape-wide:object-right hidden motion-reduce:block"
+      />
+      <div className="absolute inset-x-0 top-0 h-[62svh] bg-gradient-to-t from-black via-transparent to-transparent landscape-wide:h-svh landscape-wide:bg-gradient-to-r landscape-wide:from-black landscape-wide:via-black/40 landscape-wide:to-transparent pointer-events-none" />
+      <div className="h-[46svh] shrink-0 landscape-wide:hidden" aria-hidden="true" />
+
       <motion.div
-        className="absolute top-6 right-6 sm:top-8 sm:right-8"
-        initial={{ opacity: 0, y: -10 }}
+        className="relative z-10 container mx-auto max-w-6xl"
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}>
-        <span className="inline-flex items-center px-3 py-1 bg-[var(--emerald-500)]/10 text-[var(--emerald-300)] text-sm font-medium rounded-full border border-[var(--emerald-500)]/30 shadow-md">
+        transition={{ duration: 0.6, ease: "easeOut" }}>
+        <span className="inline-flex items-center px-3 py-1 mb-6 text-[var(--gray-300)] text-sm font-medium rounded-full border border-white/15 bg-black/40 backdrop-blur-md">
           <motion.span
             className="w-2 h-2 mr-2 bg-[var(--emerald-400)] rounded-full"
             animate={{ opacity: [1, 0.3, 1] }}
@@ -26,25 +47,18 @@ export default function HeroSection() {
           />
           Looking for more opportunities
         </span>
-      </motion.div>
-
-      <motion.div
-        className="z-10"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}>
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-[var(--gray-100)] mb-3 leading-tight">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium text-white mb-2 leading-[0.95] max-w-3xl">
           Hi, I'm <span className="text-[var(--emerald-400)]">{name}</span>.
         </h1>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[var(--gray-200)] mb-6">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[var(--gray-600)] mb-8 leading-[0.95]">
           {mainTitle}
         </h2>
-        <p className="text-lg md:text-xl text-[var(--gray-400)] mb-10 max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-[var(--gray-400)] mb-10 max-w-xl">
           {tagline}
         </p>
 
         <motion.div
-          className="flex justify-center space-x-5 sm:space-x-6 mb-12"
+          className="flex justify-start space-x-5 sm:space-x-6 mb-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}>
@@ -137,7 +151,7 @@ export default function HeroSection() {
 
         <motion.a
           href="#about"
-          className="rounded-lg font-semibold shadow-md transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--emerald-400)] focus:ring-opacity-50 border border-[var(--emerald-500)] text-[var(--emerald-400)] hover:bg-[var(--emerald-500)] hover:text-[var(--gray-900)] px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg inline-block"
+          className="rounded-full font-medium transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--emerald-400)]/50 bg-white text-black hover:bg-[var(--gray-200)] px-8 sm:px-10 py-3.5 sm:py-4 text-base sm:text-lg inline-block"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}

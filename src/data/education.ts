@@ -8,7 +8,7 @@ export interface EducationEntry {
 export const education: EducationEntry[] = [
   {
     degree: "Master of Science in Computer Science",
-    institution: "University of Florida, Gainesville, FL",
+    institution: "University of Florida, Gainesville",
     period: "Aug 2023 - May 2025",
     gpa: "GPA: 3.83/4.00",
   },
