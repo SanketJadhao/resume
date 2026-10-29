@@ -1,5 +1,7 @@
 /* src/styles/global.css */
 
+/* Inter is bundled with the site rather than loaded from Google Fonts, so it never blocks the first paint. */
+@import "@fontsource-variable/inter";
 @import "tailwindcss";
 
 /* Screens wider than 5:4 get the landscape hero video; the hero layout follows the same split. */
@@ -30,7 +32,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter Variable", "Inter", sans-serif;
   background-color: var(--gray-900);
   color: var(--gray-300);
 }

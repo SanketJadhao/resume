@@ -26,7 +26,6 @@ export default function HeroSection() {
       const video = videoRef.current;
       const cut = query.matches ? HERO_VIDEOS.portrait : HERO_VIDEOS.landscape;
       if (!video || video.currentSrc.endsWith(cut.src)) return;
-      video.poster = cut.poster;
       video.src = cut.src;
       video.play().catch(() => {});
     };
@@ -172,6 +171,17 @@ export default function HeroSection() {
           on landscape screens it fills the background on the right. object-contain never crops the phone,
           and the render's black background blends into the page. */}
       <div className="relative w-full max-w-md mx-auto aspect-square mt-2 landscape-wide:absolute landscape-wide:inset-0 landscape-wide:h-svh landscape-wide:max-w-none landscape-wide:aspect-auto landscape-wide:mt-0 pointer-events-none">
+        {/* The first frame as a plain image under the video: the right size is picked straight from
+            the HTML and fetched first, and the video covers it once it starts playing. */}
+        <picture>
+          <source srcSet={HERO_VIDEOS.portrait.poster} media={PORTRAIT_QUERY} />
+          <img
+            src={HERO_VIDEOS.landscape.poster}
+            alt=""
+            fetchPriority="high"
+            className="absolute inset-0 w-full h-full object-contain landscape-wide:object-right"
+          />
+        </picture>
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-contain landscape-wide:object-right motion-reduce:hidden"
@@ -179,19 +189,10 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          poster={HERO_VIDEOS.landscape.poster}
           aria-hidden="true">
           <source src={HERO_VIDEOS.portrait.src} type="video/mp4" media={PORTRAIT_QUERY} />
           <source src={HERO_VIDEOS.landscape.src} type="video/mp4" />
         </video>
-        <picture>
-          <source srcSet={HERO_VIDEOS.portrait.poster} media={PORTRAIT_QUERY} />
-          <img
-            src={HERO_VIDEOS.landscape.poster}
-            alt=""
-            className="absolute inset-0 w-full h-full object-contain landscape-wide:object-right hidden motion-reduce:block"
-          />
-        </picture>
         <div className="absolute inset-0 hidden landscape-wide:block bg-gradient-to-r from-black via-black/40 to-transparent" />
       </div>
     </section>
